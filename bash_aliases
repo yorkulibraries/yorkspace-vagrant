@@ -11,4 +11,4 @@ export LESS="rMPMF< -->p< (q=Quit,f=Forward,u=Up,h=Help)>" #  less prompt
 export EDITOR=vi
 
 alias dspace-package='cd /yorkspace/source/DSpace && mvn -Denv=vagrant -U clean package'
-alias dspace-update='cd /yorkspace/source/DSpace/dspace/target/dspace-installer && sudo -utomcat7 ant update && sudo service tomcat7 restart'
+alias dspace-update='cd /yorkspace/source/DSpace/dspace/target/dspace-installer && sudo ant update && sudo chown -R tomcat7:tomcat7 /dspace && sudo service tomcat7 restart'
