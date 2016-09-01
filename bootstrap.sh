@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo timedatectl set-timezone America/Toronto
+
 cp /vagrant/bash_aliases /home/vagrant/.bash_aliases 
 
 sudo apt-get update >/dev/null
@@ -21,6 +23,7 @@ sudo -upostgres createdb  --owner=dspace --encoding=UNICODE dspace
 ANT_CMD=fresh_install
 DB_DUMP=/vagrant/dspace.daily.dmp
 if [ -f $DB_DUMP ]; then
+  echo "Loading database with backup dump..."
   sudo -upostgres pg_restore -d dspace $DB_DUMP
   ANT_CMD=update
 fi
@@ -36,9 +39,8 @@ sudo a2enmod proxy_ajp
 sudo a2enmod rewrite
 sudo service apache2 restart
 
-echo "Your local YorkSpace instance should now be accessible at http://dspace.local/xmlui/"
+echo "Rebuilding SOLR index, this may take some time."
+sudo -utomcat7 /dspace/bin/dspace index-discovery &> /tmp/index-discovery.out &
+sudo -utomcat7 /dspace/bin/dspace oai import -o &> /tmp/oai-import-o.out &
 
-if [ "$ANT_CMD"="update" ]; then
-  echo "Rebuilding SOLR discovery index, this may take some time."
-  sudo -utomcat7 /dspace/bin/dspace index-discovery
-fi
+echo "Your local YorkSpace instance should now be accessible at http://dspace.local/xmlui/"
