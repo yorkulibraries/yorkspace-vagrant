@@ -12,7 +12,9 @@ Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
     git clone git@github.com:yorkulibraries/yorkspace-vagrant.git
 
 ## Bring up the box
-If you would like to preload the database with dspace daily postgresql database dump, you can copy the dspace.daily.dmp file to yorkspace-vagrant directory prior to provisioning the box.
+If you would like to preload the database with dspace daily postgresql database dump, you can copy the dspace.daily.dmp file to yorkspace-vagrant directory prior to provisioning the box. 
+
+**NOTE**: You will be asked to enter your desktop/laptop password to update the /etc/hosts file when bringing up the box.
     
     cd yorkspace-vagrant && vagrant up
 
