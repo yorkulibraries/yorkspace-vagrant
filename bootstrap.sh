@@ -30,6 +30,7 @@ fi
 
 sudo mkdir /dspace
 cd /yorkspace/source/DSpace/dspace/target/dspace-installer && sudo ant $ANT_CMD && sudo chown -R tomcat7:tomcat7 /dspace 
+[ -f /dspace/webapps/xmlui/themes/Standard/lib/css/style.css ] && sudo touch /dspace/webapps/xmlui/themes/Standard/lib/css/style.css
 sudo cp -f /vagrant/server.xml /etc/tomcat7/
 sudo service tomcat7 restart
 
